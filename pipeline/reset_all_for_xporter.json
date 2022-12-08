@@ -1,0 +1,115 @@
+{
+	"name": "reset_all_for_xporter",
+	"properties": {
+		"activities": [
+			{
+				"name": "delete source system dir from stage1np",
+				"type": "Delete",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "DS_ADLS_binary_folder",
+						"type": "DatasetReference",
+						"parameters": {
+							"filesystem": "stage1np",
+							"directory": {
+								"value": "@pipeline().parameters.sourceSystem",
+								"type": "Expression"
+							}
+						}
+					},
+					"enableLogging": false,
+					"storeSettings": {
+						"type": "AzureBlobFSReadSettings",
+						"recursive": true,
+						"enablePartitionDiscovery": false
+					}
+				}
+			},
+			{
+				"name": "delete from stage2np",
+				"type": "Delete",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "DS_ADLS_binary_folder",
+						"type": "DatasetReference",
+						"parameters": {
+							"filesystem": "stage2np",
+							"directory": {
+								"value": "@pipeline().parameters.sourceSystem",
+								"type": "Expression"
+							}
+						}
+					},
+					"enableLogging": false,
+					"storeSettings": {
+						"type": "AzureBlobFSReadSettings",
+						"recursive": true,
+						"enablePartitionDiscovery": false
+					}
+				}
+			},
+			{
+				"name": "delete from stage2p",
+				"type": "Delete",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "DS_ADLS_binary_folder",
+						"type": "DatasetReference",
+						"parameters": {
+							"filesystem": "stage2p",
+							"directory": {
+								"value": "@pipeline().parameters.sourceSystem",
+								"type": "Expression"
+							}
+						}
+					},
+					"enableLogging": false,
+					"storeSettings": {
+						"type": "AzureBlobFSReadSettings",
+						"recursive": true,
+						"enablePartitionDiscovery": false
+					}
+				}
+			}
+		],
+		"parameters": {
+			"sourceSystem": {
+				"type": "string",
+				"defaultValue": "xporter"
+			}
+		},
+		"folder": {
+			"name": "Xporter Module/Reset"
+		},
+		"annotations": [],
+		"lastPublishTime": "2022-07-21T12:19:36Z"
+	},
+	"type": "Microsoft.Synapse/workspaces/pipelines"
+}

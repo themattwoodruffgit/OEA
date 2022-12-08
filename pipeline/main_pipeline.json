@@ -1,0 +1,118 @@
+{
+	"name": "main_pipeline",
+	"properties": {
+		"activities": [
+			{
+				"name": "ingest into stage2p and 2np",
+				"type": "SynapseNotebook",
+				"dependsOn": [
+					{
+						"activity": "If Live",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebook": {
+						"referenceName": "Xporter_module_ingestion",
+						"type": "NotebookReference"
+					},
+					"parameters": {
+						"object_name": {
+							"value": "contoso_sis",
+							"type": "string"
+						},
+						"method_name": {
+							"value": "ingest",
+							"type": "string"
+						}
+					},
+					"sparkPool": {
+						"referenceName": "spark3p1sm",
+						"type": "BigDataPoolReference"
+					},
+					"conf": {
+						"spark.dynamicAllocation.enabled": null,
+						"spark.dynamicAllocation.minExecutors": null,
+						"spark.dynamicAllocation.maxExecutors": null
+					},
+					"numExecutors": null
+				}
+			},
+			{
+				"name": "If Live",
+				"type": "IfCondition",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"expression": {
+						"value": "@equals(variables('environment'), 'live')",
+						"type": "Expression"
+					},
+					"ifFalseActivities": [
+						{
+							"name": "Import from Test Data - land in stage1np_copy1",
+							"type": "ExecutePipeline",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"pipeline": {
+									"referenceName": "import_from_test_data",
+									"type": "PipelineReference"
+								},
+								"waitOnCompletion": true
+							}
+						}
+					],
+					"ifTrueActivities": [
+						{
+							"name": "Setup Xporter and Import Data - land in stage1np",
+							"type": "ExecutePipeline",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"pipeline": {
+									"referenceName": "setup_xporter",
+									"type": "PipelineReference"
+								},
+								"waitOnCompletion": true,
+								"parameters": {
+									"keyVaultName": {
+										"value": "@pipeline().parameters.keyVaultName",
+										"type": "Expression"
+									}
+								}
+							}
+						}
+					]
+				}
+			}
+		],
+		"parameters": {
+			"keyVaultName": {
+				"type": "string"
+			}
+		},
+		"variables": {
+			"environment": {
+				"type": "String",
+				"defaultValue": "live"
+			}
+		},
+		"folder": {
+			"name": "Xporter Module"
+		},
+		"annotations": [],
+		"lastPublishTime": "2022-08-02T11:25:04Z"
+	},
+	"type": "Microsoft.Synapse/workspaces/pipelines"
+}

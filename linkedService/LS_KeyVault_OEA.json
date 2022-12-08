@@ -1,0 +1,11 @@
+{
+	"name": "LS_KeyVault_OEA",
+	"type": "Microsoft.Synapse/workspaces/linkedservices",
+	"properties": {
+		"type": "AzureKeyVault",
+		"annotations": [],
+		"typeProperties": {
+			"baseUrl": "https://gdat-oea-uat-kv.vault.azure.net/"
+		}
+	}
+}

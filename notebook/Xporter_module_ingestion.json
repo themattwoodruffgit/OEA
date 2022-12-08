@@ -1,0 +1,1562 @@
+{
+	"name": "Xporter_module_ingestion",
+	"properties": {
+		"nbformat": 4,
+		"nbformat_minor": 2,
+		"bigDataPool": {
+			"referenceName": "spark3p1sm",
+			"type": "BigDataPoolReference"
+		},
+		"sessionProperties": {
+			"driverMemory": "28g",
+			"driverCores": 4,
+			"executorMemory": "28g",
+			"executorCores": 4,
+			"numExecutors": 2,
+			"runAsWorkspaceSystemIdentity": false,
+			"conf": {
+				"spark.dynamicAllocation.enabled": "false",
+				"spark.dynamicAllocation.minExecutors": "2",
+				"spark.dynamicAllocation.maxExecutors": "2",
+				"spark.autotune.trackingId": "fc9bc0f5-face-4862-b6bf-13ad00b1cd7c"
+			}
+		},
+		"metadata": {
+			"saveOutput": true,
+			"synapse_widget": {
+				"version": "0.1"
+			},
+			"enableDebugMode": false,
+			"kernelspec": {
+				"name": "synapse_pyspark",
+				"display_name": "Synapse PySpark"
+			},
+			"language_info": {
+				"name": "python"
+			},
+			"a365ComputeOptions": {
+				"id": "/subscriptions/79a9a1b8-17c9-4098-bbae-16c21b7edd2a/resourceGroups/gdat-oea-uat/providers/Microsoft.Synapse/workspaces/gdat-oea-uat-syn/bigDataPools/spark3p1sm",
+				"name": "spark3p1sm",
+				"type": "Spark",
+				"endpoint": "https://gdat-oea-uat-syn.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/spark3p1sm",
+				"auth": {
+					"type": "AAD",
+					"authResource": "https://dev.azuresynapse.net",
+					"authHeader": null
+				},
+				"sparkVersion": "3.1",
+				"nodeCount": 3,
+				"cores": 4,
+				"memory": 28,
+				"extraHeader": null
+			},
+			"sessionKeepAliveTimeout": 30
+		},
+		"cells": [
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"outputs_hidden": true
+					}
+				},
+				"source": [
+					"%run /OEA_py"
+				],
+				"execution_count": 17
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"%run /Xporter_py"
+				],
+				"execution_count": 27
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": true
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"oea = OEA()\r\n",
+					"xporter = Xporter()"
+				],
+				"execution_count": 28
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": true
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"xporter._prepare_schoolinfo()"
+				]
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": true
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"xporter.ingest_schoolinfo()"
+				],
+				"execution_count": 56
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": true
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"xporter.ingest_schoolinfo_stage3()"
+				],
+				"execution_count": 58
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": true
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"xporter._prepare_students()"
+				],
+				"execution_count": 21
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": true
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"xporter.ingest_students()"
+				],
+				"execution_count": 22
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": true
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"xporter.ingest_students_stage3()"
+				],
+				"execution_count": 15
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": true
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"xporter._prepare_attendancesummary()"
+				],
+				"execution_count": 18
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"xporter.ingest_attendancesummary()"
+				]
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"xporter.ingest_attendancesummary_stage3()"
+				]
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"xporter._prepare_groups()"
+				]
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"xporter.ingest_groups()"
+				]
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"xporter.ingest_groups_stage3()"
+				]
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"xporter._prepare_HistoricalAttendanceSummary()"
+				]
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"xporter.ingest_HistoricalAttendanceSummary()"
+				]
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"xporter.ingest_HistoricalAttendanceSummary_stage3()"
+				]
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"xporter._prepare_staff()"
+				]
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"xporter.ingest_staff()"
+				]
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"xporter.ingest_staff_stage3()"
+				]
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"xporter._prepare_StudentMembers()"
+				]
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"xporter.ingest_StudentMembers()"
+				]
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"xporter.ingest_StudentMembers_stage3()"
+				]
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"# SCHOOLINFO"
+				]
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"### Processing JSON files into CSV"
+				]
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": true
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"\"\"\"from pyspark.sql.functions import lit\r\n",
+					"oea.rm_if_exists(oea.stage1np + '/xporter/schoolinfocsv')\r\n",
+					"df_schoolinfo = None\r\n",
+					"# loop through school EstabId folders landed by Xporter and union schoolinfo\r\n",
+					"for folder in oea.get_folders(oea.stage1np + '/xporter'):\r\n",
+					"    if folder.isnumeric():\r\n",
+					"        print(folder)\r\n",
+					"        try:\r\n",
+					"            new_df = oea.load(folder,'SchoolInfo.json',stage = oea.stage1np + '/xporter',data_format='json')\r\n",
+					"            new_df = new_df.select(F.explode('SchoolInfo').alias('exploded_values')).select(\"exploded_values.*\")\r\n",
+					"            new_df = new_df.withColumn('SchoolID',lit(folder))\r\n",
+					"            if df_schoolinfo is None:\r\n",
+					"                df_schoolinfo = new_df\r\n",
+					"            else:\r\n",
+					"                df_schoolinfo = df_schoolinfo.union(new_df)\r\n",
+					"        except:\r\n",
+					"            pass\r\n",
+					"print('newdf')\r\n",
+					"new_df.show()\r\n",
+					"print('shoolinfo')\r\n",
+					"df_schoolinfo.show()\r\n",
+					"# explode from the json array to columns\r\n",
+					"#df_schoolinfo1 = df_schoolinfo.select(F.explode('SchoolInfo').alias('exploded_values')).select(\"exploded_values.*\")\r\n",
+					"\r\n",
+					"# write the aggregated csv combining all schoolinfo data file out to load to stage 1\r\n",
+					"df_schoolinfo.write.option(\"header\",\"true\").csv(oea.stage1np + '/xporter/schoolinfocsv')\"\"\""
+				],
+				"execution_count": 12
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"### Ingesting data into stage 2"
+				]
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": true
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"\"\"\"csvd = oea.load_csv(\"stage1np/xporter/schoolinfocsv/*.csv\") #reading csv file\r\n",
+					"print(csvd)\r\n",
+					"csvd.show()\r\n",
+					"\r\n",
+					"newdf = csvd[csvd['EstabId'] != 'null']\r\n",
+					"newdf = newdf.drop('Address')\r\n",
+					"#newdf = newdf.columns.append('Address')\r\n",
+					"newdf = newdf.withColumn(\"Address\",col(\"RowHash\"))\r\n",
+					"newdf.show()\r\n",
+					"oea.rm_if_exists(oea.stage1np + '/xporter/schoolinfo')#remove existing schoolinfo folder having old batch folder\r\n",
+					"oea.land(\"xporter\", \"schoolinfo\", newdf)#creating batch folder\r\n",
+					"\r\n",
+					"oea.ingest_snapshot_data('xporter', 'schoolinfo', xporter.schemas['schoolinfo'], 'SchoolID', primary_key='EstabId')#ingesting into stage 2\r\n",
+					"#ingest_snapshot_data(self, source_system, tablename, schema, partition_by, primary_key='id', data_format='csv', has_header=True):\"\"\""
+				],
+				"execution_count": 9
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"### Ingesting data into stage 3"
+				]
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": true
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"\"\"\" Processes delta batch data from stage2 into stage3 \"\"\"\r\n",
+					"\"\"\"#oea.rm_if_exists(oea.stage3p + '/xporter/schoolinfo')\r\n",
+					"#oea.rm_if_exists(oea.stage3np + '/xporter/schoolinfo')   \r\n",
+					"source_path = f'{oea.stage2p}/xporter/schoolinfo_pseudo'\r\n",
+					"source_path2 = f'{oea.stage2np}/xporter/schoolinfo_lookup'\r\n",
+					"p_destination_path = f'{oea.stage3p}/xporter/schoolinfo_pseudo'\r\n",
+					"np_destination_path = f'{oea.stage3np}/xporter/schoolinfo_lookup'\r\n",
+					"spark_schema = oea.to_spark_schema(xporter.schemas['schoolinfo'])\r\n",
+					"\r\n",
+					"df_1 = spark.read.load(source_path, format='parquet', header='true', schema=spark_schema)\r\n",
+					"df_2 = spark.read.load(source_path2, format='parquet', header='true', schema=spark_schema)\r\n",
+					"print(\"df_1\")\r\n",
+					"df_1.show()\r\n",
+					"print(\"df_2\")\r\n",
+					"df_2.show()\r\n",
+					"# df = df.dropDuplicates('EstabId') # More info: https://spark.apache.org/docs/latest/structured-streaming-programming-guide.html#streaming-deduplication\r\n",
+					"df2 = df_1.withColumnRenamed('Name','School_Name').withColumnRenamed('Head', 'Head_Teacher')\r\n",
+					"df_pseudo = df2.drop(col(\"Telephone\"))\r\n",
+					"df_lookup = df_2.drop(col(\"Telephone\"))\r\n",
+					"df_pseudo.write.save(p_destination_path, mode='overwrite', partitionBy='SchoolID')\r\n",
+					"df_lookup.write.save(np_destination_path, mode = 'overwrite', partitionBy = 'SchoolID')\r\n",
+					"\r\n",
+					"#oea.ingest_snapshot_data_stage3('xporter', 'schoolinfo', xporter.schemas['schoolinfo'], 'SchoolID', primary_key='EstabId')\"\"\""
+				],
+				"execution_count": 15
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"# STUDENTS"
+				]
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"### Processing JSON files into CSV"
+				]
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": true
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"\"\"\"from pyspark.sql.functions import lit\r\n",
+					"oea.rm_if_exists(oea.stage1np + '/xporter/studentscsv')\r\n",
+					"df_students = None\r\n",
+					"for folder in oea.get_folders(oea.stage1np + '/xporter'):\r\n",
+					"    if folder.isnumeric():\r\n",
+					"        try:\r\n",
+					"            new_df = oea.load(folder,'Students.json',stage = oea.stage1np + '/xporter',data_format='json')\r\n",
+					"            new_df = new_df.select(F.explode('Students').alias('exploded_values')).select(\"exploded_values.*\")\r\n",
+					"            new_df = new_df.withColumn('SchoolID',lit(folder))\r\n",
+					"            if df_students is None:\r\n",
+					"                df_students = new_df\r\n",
+					"            else:\r\n",
+					"                df_students = df_students.union(new_df)\r\n",
+					"        except:\r\n",
+					"            pass\r\n",
+					"# explode from the json array to columns\r\n",
+					"#df_students = df_students.select(F.explode('Students').alias('exploded_values')).select(\"exploded_values.*\")\r\n",
+					"print('df_students - ')\r\n",
+					"df_students.show()\r\n",
+					"# write the aggregated csv combining all schoolinfo data file out to load to stage 1\r\n",
+					"df_students.write.option(\"header\",\"true\").csv(oea.stage1np + '/xporter/studentscsv')\r\n",
+					"print('df_students - ')\r\n",
+					"df_students.show()\"\"\""
+				],
+				"execution_count": 57
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"### Ingesting data into stage 2"
+				]
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": true
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"\"\"\"csvd = oea.load_csv(\"stage1np/xporter/studentscsv/*.csv\") #reading csv file\r\n",
+					"print(csvd)\r\n",
+					"csvd.show()\r\n",
+					"\r\n",
+					"newdf = csvd[csvd['StudentStatus'] != 'null']\r\n",
+					"newdf = newdf.drop('AddressBlock')\r\n",
+					"\r\n",
+					"newdf = newdf.withColumn(\"AddressBlock\",col(\"Forename\"))\r\n",
+					"newdf.show()\r\n",
+					"oea.rm_if_exists(oea.stage1np + '/xporter/students')#remove existing students folder having old batch folder\r\n",
+					"oea.land(\"xporter\", \"students\", newdf)#creating batch folder\r\n",
+					"\r\n",
+					"oea.ingest_snapshot_data('xporter', 'students', xporter.schemas['students'], 'SchoolID', primary_key='ExternalId')#ingesting into stage 2\r\n",
+					"#ingest_snapshot_data(self, source_system, tablename, schema, partition_by, primary_key='id', data_format='csv', has_header=True):\"\"\""
+				],
+				"execution_count": 10
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"### Ingesting data into stage 3"
+				]
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": true
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"\"\"\" Processes delta batch data from stage2 into stage3 \r\n",
+					"source_path = f'{oea.stage2p}/xporter/students_pseudo'\r\n",
+					"source_path2 = f'{oea.stage2np}/xporter/students_lookup'\r\n",
+					"p_destination_path = f'{oea.stage3p}/xporter/students_pseudo'\r\n",
+					"np_destination_path = f'{oea.stage3np}/xporter/students_lookup'\r\n",
+					"spark_schema = oea.to_spark_schema(xporter.schemas['students'])\r\n",
+					"\r\n",
+					"df_1 = spark.read.load(source_path, format='parquet', header='true', schema=spark_schema)\r\n",
+					"df_2 = spark.read.load(source_path2, format='parquet', header='true', schema=spark_schema)\r\n",
+					"print(\"df_1\")\r\n",
+					"df_1.show()\r\n",
+					"print(\"df_2\")\r\n",
+					"df_2.show()\r\n",
+					"# df = df.dropDuplicates('EstabId') # More info: https://spark.apache.org/docs/latest/structured-streaming-programming-guide.html#streaming-deduplication\r\n",
+					"#df2 = df_1.withColumnRenamed('Name','School_Name').withColumnRenamed('Head', 'Head_Teacher')\r\n",
+					"df_pseudo = df_1\r\n",
+					"df_lookup = df_2\r\n",
+					"df_pseudo.write.save(p_destination_path, mode='overwrite', partitionBy='SchoolID')\r\n",
+					"df_lookup.write.save(np_destination_path, mode = 'overwrite', partitionBy = 'SchoolID')\r\n",
+					"\r\n",
+					"#oea.ingest_snapshot_data_stage3('xporter', 'schoolinfo', xporter.schemas['schoolinfo'], 'SchoolID', primary_key='EstabId')\"\"\""
+				],
+				"execution_count": 4
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"# AttendanceSummary"
+				]
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"### Processing JSON files into CSV"
+				]
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": true
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"\"\"\"from pyspark.sql.functions import lit\r\n",
+					"oea.rm_if_exists(oea.stage1np + '/xporter/attendancesummarycsv')\r\n",
+					"df_attendancesummary = None\r\n",
+					"for folder in oea.get_folders(oea.stage1np + '/xporter'):\r\n",
+					"    if folder.isnumeric():\r\n",
+					"        try:\r\n",
+					"            new_df = oea.load(folder,'AttendanceSummary.json',stage = oea.stage1np + '/xporter',data_format='json')\r\n",
+					"            new_df = new_df.select(F.explode('AttendanceSummary').alias('exploded_values')).select(\"exploded_values.*\")\r\n",
+					"            new_df = new_df.withColumn('SchoolID',lit(folder))\r\n",
+					"            if df_attendancesummary is None:\r\n",
+					"                df_attendancesummary = new_df\r\n",
+					"            else:\r\n",
+					"                df_attendancesummary = df_attendancesummary.union(new_df)\r\n",
+					"        except:\r\n",
+					"            pass\r\n",
+					"print('new_df')\r\n",
+					"new_df.show()\r\n",
+					"# explode from the json array to columns\r\n",
+					"#df_attendancesummary = df_attendancesummary.select(F.explode('AttendanceSummary').alias('exploded_values')).select(\"exploded_values.*\")\r\n",
+					"# write the aggregated csv combining all schoolinfo data file out to load to stage 1\r\n",
+					"df_attendancesummary.write.option(\"header\",\"true\").csv(oea.stage1np + '/xporter/attendancesummarycsv')\r\n",
+					"print('df_attendancesummary - ')\r\n",
+					"df_attendancesummary.show()\"\"\""
+				],
+				"execution_count": 7
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"### Ingesting data into stage 2"
+				]
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": true
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"\"\"\"csvd = oea.load_csv(\"stage1np/xporter/attendancesummarycsv/*.csv\") #reading csv file\r\n",
+					"print(csvd)\r\n",
+					"oea.rm_if_exists(oea.stage1np + '/xporter/attendancesummary')\r\n",
+					"oea.land(\"xporter\", \"attendancesummary\", csvd)#creating batch folder\r\n",
+					"oea.ingest_snapshot_data('xporter', 'attendancesummary', xporter.schemas['attendancesummary'], 'SchoolID', primary_key='IdaasId')#ingesting into stage 2\"\"\"\"\"\""
+				],
+				"execution_count": 6
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"### Ingesting data into stage 3"
+				]
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": true
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"\"\"\" Processes delta batch data from stage2 into stage3 \r\n",
+					"source_path = f'{oea.stage2p}/xporter/attendancesummary_pseudo'\r\n",
+					"source_path2 = f'{oea.stage2np}/xporter/attendancesummary_lookup'\r\n",
+					"p_destination_path = f'{oea.stage3p}/xporter/attendancesummary_pseudo'\r\n",
+					"np_destination_path = f'{oea.stage3np}/xporter/attendancesummary_lookup'\r\n",
+					"spark_schema = oea.to_spark_schema(xporter.schemas['attendancesummary'])\r\n",
+					"\r\n",
+					"df_1 = spark.read.load(source_path, format='parquet', header='true', schema=spark_schema)\r\n",
+					"df_2 = spark.read.load(source_path2, format='parquet', header='true', schema=spark_schema)\r\n",
+					"print(\"df_1\")\r\n",
+					"df_1.show()\r\n",
+					"print(\"df_2\")\r\n",
+					"df_2.show()\r\n",
+					"# df = df.dropDuplicates('EstabId') # More info: https://spark.apache.org/docs/latest/structured-streaming-programming-guide.html#streaming-deduplication\r\n",
+					"#df2 = df_1.withColumnRenamed('Name','School_Name').withColumnRenamed('Head', 'Head_Teacher')\r\n",
+					"df_pseudo = df_1\r\n",
+					"df_lookup = df_2\r\n",
+					"df_pseudo.write.save(p_destination_path, mode='overwrite', partitionBy='SchoolID')\r\n",
+					"df_lookup.write.save(np_destination_path, mode = 'overwrite', partitionBy = 'SchoolID')\r\n",
+					"\r\n",
+					"#oea.ingest_snapshot_data_stage3('xporter', 'schoolinfo', xporter.schemas['schoolinfo'], 'SchoolID', primary_key='EstabId')\"\"\""
+				],
+				"execution_count": 7
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"# Groups"
+				]
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"### Processing JSON files into CSV"
+				]
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": true
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"\"\"\"from pyspark.sql.functions import lit\r\n",
+					"oea.rm_if_exists(oea.stage1np + '/xporter/groupscsv')\r\n",
+					"df_groups1 = None\r\n",
+					"for folder in oea.get_folders(oea.stage1np + '/xporter'):\r\n",
+					"    print(folder)\r\n",
+					"    if folder.isnumeric():\r\n",
+					"        try:\r\n",
+					"            new_df = oea.load(folder,'groups.json',stage = oea.stage1np + '/xporter',data_format='json')\r\n",
+					"            new_df = new_df.select(F.explode('Group').alias('exploded_values')).select(\"exploded_values.*\")\r\n",
+					"            new_df = new_df.withColumn('SchoolID',lit(folder))            \r\n",
+					"            if df_groups1 is None:\r\n",
+					"                df_groups1 = new_df\r\n",
+					"            else:\r\n",
+					"                df_groups1 = df_groups1.union(new_df)\r\n",
+					"        except:\r\n",
+					"            pass\r\n",
+					"print('new_df3')\r\n",
+					"new_df.show()\r\n",
+					"df_groups1.write.option(\"header\",\"true\").csv(oea.stage1np + '/xporter/groupscsv')\r\n",
+					"print('df_groups1 - ')\r\n",
+					"df_groups1.show()\"\"\""
+				],
+				"execution_count": 6
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"### Ingesting data into stage 2"
+				]
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": true
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"\"\"\"csvd = oea.load_csv(\"stage1np/xporter/groupscsv/*.csv\") #reading csv file\r\n",
+					"print(\"csvd\")\r\n",
+					"csvd.show()\r\n",
+					"oea.rm_if_exists(oea.stage1np + '/xporter/Group')\r\n",
+					"oea.land(\"xporter\", \"Group\", csvd)#creating batch folder\r\n",
+					"oea.ingest_snapshot_data('xporter', 'Group', xporter.schemas['groups'], 'SchoolID', primary_key='Id')#ingesting into stage 2\"\"\"\"\"\""
+				],
+				"execution_count": 24
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"### Ingesting data into stage 3"
+				]
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": true
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"\"\"\"Processes delta batch data from stage2 into stage3 \r\n",
+					"source_path = f'{oea.stage2p}/xporter/Group_pseudo'\r\n",
+					"source_path2 = f'{oea.stage2np}/xporter/Group_lookup'\r\n",
+					"p_destination_path = f'{oea.stage3p}/xporter/Group_pseudo'\r\n",
+					"np_destination_path = f'{oea.stage3np}/xporter/Group_lookup'\r\n",
+					"spark_schema = oea.to_spark_schema(xporter.schemas['groups'])\r\n",
+					"\r\n",
+					"df_1 = spark.read.load(source_path, format='parquet', header='true', schema=spark_schema)\r\n",
+					"df_2 = spark.read.load(source_path2, format='parquet', header='true', schema=spark_schema)\r\n",
+					"print(\"df_1\")\r\n",
+					"df_1.show()\r\n",
+					"print(\"df_2\")\r\n",
+					"df_2.show()\r\n",
+					"# df = df.dropDuplicates('EstabId') # More info: https://spark.apache.org/docs/latest/structured-streaming-programming-guide.html#streaming-deduplication\r\n",
+					"#df2 = df_1.withColumnRenamed('Name','School_Name').withColumnRenamed('Head', 'Head_Teacher')\r\n",
+					"df_pseudo = df_1\r\n",
+					"df_lookup = df_2\r\n",
+					"df_pseudo.write.save(p_destination_path, mode='overwrite', partitionBy='SchoolID')\r\n",
+					"df_lookup.write.save(np_destination_path, mode = 'overwrite', partitionBy = 'SchoolID')\r\n",
+					"\r\n",
+					"#oea.ingest_snapshot_data_stage3('xporter', 'schoolinfo', xporter.schemas['schoolinfo'], 'SchoolID', primary_key='EstabId')\"\"\""
+				],
+				"execution_count": 9
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"# HistoricalAttendanceSummary"
+				]
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"### Processing JSON files into CSV"
+				]
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": true
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"\"\"\"from pyspark.sql.functions import lit\r\n",
+					"oea.rm_if_exists(oea.stage1np + '/xporter/HistoricalAttendanceSummarycsv')\r\n",
+					"df_HistoricalAttendanceSummary = None\r\n",
+					"for folder in oea.get_folders(oea.stage1np + '/xporter'):\r\n",
+					"    print(folder)\r\n",
+					"    if folder.isnumeric():\r\n",
+					"        try:\r\n",
+					"            new_df = oea.load(folder,'HistoricalAttendanceSummary.json',stage = oea.stage1np + '/xporter',data_format='json')\r\n",
+					"            new_df = new_df.select(F.explode('HistoricalAttendanceSummary').alias('exploded_values')).select(\"exploded_values.*\")\r\n",
+					"            new_df = new_df.withColumn('SchoolID',lit(folder))            \r\n",
+					"            if df_HistoricalAttendanceSummary is None:\r\n",
+					"                df_HistoricalAttendanceSummary = new_df\r\n",
+					"            else:\r\n",
+					"                df_HistoricalAttendanceSummary = df_HistoricalAttendanceSummary.union(new_df)\r\n",
+					"        except:\r\n",
+					"            pass\r\n",
+					"print('new_df3')\r\n",
+					"new_df.show()\r\n",
+					"df_HistoricalAttendanceSummary.write.option(\"header\",\"true\").csv(oea.stage1np + '/xporter/HistoricalAttendanceSummarycsv')\r\n",
+					"print('df_groups1 - ')\r\n",
+					"df_HistoricalAttendanceSummary.show()\"\"\""
+				],
+				"execution_count": 8
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"### Ingesting data into stage 2"
+				]
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": true
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"\"\"\"\r\n",
+					"csvd = oea.load_csv(\"stage1np/xporter/HistoricalAttendanceSummarycsv/*.csv\") #reading csv file\r\n",
+					"print(\"csvd\")\r\n",
+					"csvd.show()\r\n",
+					"newdf = csvd[csvd['StudentId'] != 'null']\r\n",
+					"newdf = newdf.drop('Marks')\r\n",
+					"newdf = newdf.withColumn(\"Marks\",col(\"Id\"))\r\n",
+					"print('newdf')\r\n",
+					"newdf.show()\r\n",
+					"oea.rm_if_exists(oea.stage1np + '/xporter/HistoricalAttendanceSummary')\r\n",
+					"oea.land(\"xporter\", \"HistoricalAttendanceSummary\", newdf)#creating batch folder\r\n",
+					"oea.ingest_snapshot_data('xporter', 'HistoricalAttendanceSummary', xporter.schemas['HistoricalAttendanceSummary'], 'SchoolID', primary_key = 'Id')#ingesting into stage 2\"\"\"\"\"\""
+				],
+				"execution_count": 6
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"### Ingesting data into stage 3"
+				]
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": true
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"\"\"\" Processes delta batch data from stage2 into stage3 \r\n",
+					"source_path = f'{oea.stage2p}/xporter/HistoricalAttendanceSummary_pseudo'\r\n",
+					"source_path2 = f'{oea.stage2np}/xporter/HistoricalAttendanceSummary_lookup'\r\n",
+					"p_destination_path = f'{oea.stage3p}/xporter/HistoricalAttendanceSummary_pseudo'\r\n",
+					"np_destination_path = f'{oea.stage3np}/xporter/HistoricalAttendanceSummary_lookup'\r\n",
+					"spark_schema = oea.to_spark_schema(xporter.schemas['HistoricalAttendanceSummary'])\r\n",
+					"\r\n",
+					"df_1 = spark.read.load(source_path, format='parquet', header='true', schema=spark_schema)\r\n",
+					"df_2 = spark.read.load(source_path2, format='parquet', header='true', schema=spark_schema)\r\n",
+					"print(\"df_1\")\r\n",
+					"df_1.show()\r\n",
+					"print(\"df_2\")\r\n",
+					"df_2.show()\r\n",
+					"# df = df.dropDuplicates('EstabId') # More info: https://spark.apache.org/docs/latest/structured-streaming-programming-guide.html#streaming-deduplication\r\n",
+					"#df2 = df_1.withColumnRenamed('Name','School_Name').withColumnRenamed('Head', 'Head_Teacher')\r\n",
+					"df_pseudo = df_1\r\n",
+					"df_lookup = df_2\r\n",
+					"df_pseudo.write.save(p_destination_path, mode='overwrite', partitionBy='SchoolID')\r\n",
+					"df_lookup.write.save(np_destination_path, mode = 'overwrite', partitionBy = 'SchoolID')\r\n",
+					"\r\n",
+					"#oea.ingest_snapshot_data_stage3('xporter', 'schoolinfo', xporter.schemas['schoolinfo'], 'SchoolID', primary_key='EstabId')\"\"\""
+				],
+				"execution_count": 10
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"# STAFF"
+				]
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"### Processing JSON files into CSV"
+				]
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": true
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"\"\"\"from pyspark.sql.functions import lit\r\n",
+					"oea.rm_if_exists(oea.stage1np + '/xporter/staffcsv')\r\n",
+					"df_staff = None\r\n",
+					"for folder in oea.get_folders(oea.stage1np + '/xporter'):\r\n",
+					"    print(folder)\r\n",
+					"    if folder.isnumeric():\r\n",
+					"        try:\r\n",
+					"            new_df = oea.load(folder,'staff.json',stage = oea.stage1np + '/xporter',data_format='json')\r\n",
+					"            new_df = new_df.select(F.explode('staff').alias('exploded_values')).select(\"exploded_values.*\")\r\n",
+					"            new_df = new_df.withColumn('SchoolID',lit(folder))            \r\n",
+					"            if df_staff is None:\r\n",
+					"                df_staff = new_df\r\n",
+					"            else:\r\n",
+					"                df_staff = df_staff.union(new_df)\r\n",
+					"        except:\r\n",
+					"            pass\r\n",
+					"print('new_df3')\r\n",
+					"new_df.show()\r\n",
+					"df_staff.write.option(\"header\",\"true\").csv(oea.stage1np + '/xporter/staffcsv')\r\n",
+					"print('df_groups1 - ')\r\n",
+					"df_staff.show()\"\"\""
+				],
+				"execution_count": 7
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"### Ingesting data into stage 2"
+				]
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": true
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"\"\"\"csvd = oea.load_csv(\"stage1np/xporter/staffcsv/*.csv\") #reading csv file\r\n",
+					"print(\"csvd\")\r\n",
+					"csvd.show()\r\n",
+					"newdf = csvd[csvd[\"ExternalId\"] != 'null']\r\n",
+					"newdf = newdf.drop('AddressBlock')\r\n",
+					"newdf = newdf.withColumn(\"AddressBlock\",col(\"Forename\"))\r\n",
+					"oea.rm_if_exists(oea.stage1np + '/xporter/staff')\r\n",
+					"oea.land(\"xporter\", \"staff\", newdf)#creating batch folder\r\n",
+					"oea.ingest_snapshot_data('xporter', 'staff', xporter.schemas['staff'], 'SchoolID', primary_key='Id')#ingesting into stage 2\"\"\"\"\"\""
+				],
+				"execution_count": 16
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"### Ingesting data into stage 3"
+				]
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": true
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"\"\"\"Processes delta batch data from stage2 into stage3\r\n",
+					"source_path = f'{oea.stage2p}/xporter/staff_pseudo'\r\n",
+					"source_path2 = f'{oea.stage2np}/xporter/staff_lookup'\r\n",
+					"p_destination_path = f'{oea.stage3p}/xporter/staff_pseudo'\r\n",
+					"np_destination_path = f'{oea.stage3np}/xporter/staff_lookup'\r\n",
+					"spark_schema = oea.to_spark_schema(xporter.schemas['staff'])\r\n",
+					"\r\n",
+					"df_1 = spark.read.load(source_path, format='parquet', header='true', schema=spark_schema)\r\n",
+					"df_2 = spark.read.load(source_path2, format='parquet', header='true', schema=spark_schema)\r\n",
+					"print(\"df_1\")\r\n",
+					"df_1.show()\r\n",
+					"print(\"df_2\")\r\n",
+					"df_2.show()\r\n",
+					"# df = df.dropDuplicates('EstabId') # More info: https://spark.apache.org/docs/latest/structured-streaming-programming-guide.html#streaming-deduplication\r\n",
+					"#df2 = df_1.withColumnRenamed('Name','School_Name').withColumnRenamed('Head', 'Head_Teacher')\r\n",
+					"df_pseudo = df_1\r\n",
+					"df_lookup = df_2\r\n",
+					"df_pseudo.write.save(p_destination_path, mode='overwrite', partitionBy='SchoolID')\r\n",
+					"df_lookup.write.save(np_destination_path, mode = 'overwrite', partitionBy = 'SchoolID')\r\n",
+					"\r\n",
+					"#oea.ingest_snapshot_data_stage3('xporter', 'schoolinfo', xporter.schemas['schoolinfo'], 'SchoolID', primary_key='EstabId')\"\"\""
+				],
+				"execution_count": 11
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"# StudentMembers"
+				]
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"### Processing JSON files into CSV"
+				]
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": true
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"\"\"\"from pyspark.sql.functions import lit\r\n",
+					"oea.rm_if_exists(oea.stage1np + '/xporter/StudentMemberscsv')\r\n",
+					"df_StudentMembers = None\r\n",
+					"for folder in oea.get_folders(oea.stage1np + '/xporter'):\r\n",
+					"    print(folder)\r\n",
+					"    if folder.isnumeric():\r\n",
+					"        try:\r\n",
+					"            new_df = oea.load(folder,'groups.json',stage = oea.stage1np + '/xporter',data_format='json')\r\n",
+					"            new_df = new_df.select(F.explode('StudentMembers').alias('exploded_values')).select(\"exploded_values.*\")\r\n",
+					"            new_df = new_df.withColumn('SchoolID',lit(folder))            \r\n",
+					"            if df_StudentMembers is None:\r\n",
+					"                df_StudentMembers = new_df\r\n",
+					"            else:\r\n",
+					"                df_StudentMembers = df_StudentMembers.union(new_df)\r\n",
+					"        except:\r\n",
+					"            pass\r\n",
+					"print('new_df3')\r\n",
+					"new_df.show()\r\n",
+					"df_StudentMembers.write.option(\"header\",\"true\").csv(oea.stage1np + '/xporter/StudentMemberscsv')\r\n",
+					"print('StudentMembers - ')\r\n",
+					"df_StudentMembers.show()\"\"\""
+				],
+				"execution_count": 20
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"### Ingesting data into stage 2"
+				]
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": true
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"\"\"\"csvd = oea.load_csv(\"stage1np/xporter/StudentMemberscsv/*.csv\") #reading csv file\r\n",
+					"print(\"csvd\")\r\n",
+					"csvd.show()\r\n",
+					"oea.rm_if_exists(oea.stage1np + '/xporter/StudentMembers')\r\n",
+					"oea.land(\"xporter\", \"StudentMembers\", csvd)#creating batch folder\r\n",
+					"oea.ingest_snapshot_data('xporter', 'StudentMembers', xporter.schemas['StudentMembers'], 'SchoolID', primary_key='Id')#ingesting into stage 2\"\"\"\"\"\""
+				],
+				"execution_count": 29
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"### Ingesting data into stage3"
+				]
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": true
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"\"\"\" Processes delta batch data from stage2 into stage3 \r\n",
+					"source_path = f'{oea.stage2p}/xporter/StudentMembers_pseudo'\r\n",
+					"source_path2 = f'{oea.stage2np}/xporter/StudentMembers_lookup'\r\n",
+					"p_destination_path = f'{oea.stage3p}/xporter/StudentMembers_pseudo'\r\n",
+					"np_destination_path = f'{oea.stage3np}/xporter/StudentMembers_lookup'\r\n",
+					"spark_schema = oea.to_spark_schema(xporter.schemas['StudentMembers'])\r\n",
+					"\r\n",
+					"df_1 = spark.read.load(source_path, format='parquet', header='true', schema=spark_schema)\r\n",
+					"df_2 = spark.read.load(source_path2, format='parquet', header='true', schema=spark_schema)\r\n",
+					"print(\"df_1\")\r\n",
+					"df_1.show()\r\n",
+					"print(\"df_2\")\r\n",
+					"df_2.show()\r\n",
+					"# df = df.dropDuplicates('EstabId') # More info: https://spark.apache.org/docs/latest/structured-streaming-programming-guide.html#streaming-deduplication\r\n",
+					"#df2 = df_1.withColumnRenamed('Name','School_Name').withColumnRenamed('Head', 'Head_Teacher')\r\n",
+					"df_pseudo = df_1\r\n",
+					"df_lookup = df_2\r\n",
+					"df_pseudo.write.save(p_destination_path, mode='overwrite', partitionBy='SchoolID')\r\n",
+					"df_lookup.write.save(np_destination_path, mode = 'overwrite', partitionBy = 'SchoolID')\r\n",
+					"\r\n",
+					"#oea.ingest_snapshot_data_stage3('xporter', 'schoolinfo', xporter.schemas['schoolinfo'], 'SchoolID', primary_key='EstabId')\"\"\""
+				],
+				"execution_count": 30
+			}
+		]
+	}
+}

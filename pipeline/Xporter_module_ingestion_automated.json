@@ -1,0 +1,36 @@
+{
+	"name": "Xporter_module_ingestion_automated",
+	"properties": {
+		"activities": [
+			{
+				"name": "Ingest_attendancesummary",
+				"type": "SynapseNotebook",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebook": {
+						"referenceName": "Ingest_attendancesummary",
+						"type": "NotebookReference"
+					},
+					"snapshot": true,
+					"sparkPool": {
+						"referenceName": "spark3p1sm",
+						"type": "BigDataPoolReference"
+					},
+					"executorSize": null,
+					"driverSize": null
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2022-12-08T10:48:26Z"
+	},
+	"type": "Microsoft.Synapse/workspaces/pipelines"
+}

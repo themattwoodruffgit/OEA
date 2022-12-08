@@ -1,0 +1,85 @@
+{
+	"name": "import_from_test_data",
+	"properties": {
+		"activities": [
+			{
+				"name": "Get Data From Xporter Endpoints",
+				"type": "ForEach",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@createArray(\n    json(concat('{ \"estab\": \"3281102\", \"endpoint\": \"SchoolInfo\"')), \n    json(concat('{ \"estab\": \"3281102\", \"endpoint\": \"Students\" }')),\n    json(concat('{ \"estab\": \"3281102\", \"endpoint\": \"HistoricalAttendanceSummary\" }')))",
+						"type": "Expression"
+					},
+					"activities": [
+						{
+							"name": "Copy Data From Test Data",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "BinarySource",
+									"storeSettings": {
+										"type": "HttpReadSettings",
+										"requestMethod": "GET",
+										"requestTimeout": ""
+									},
+									"formatSettings": {
+										"type": "BinaryReadSettings"
+									}
+								},
+								"sink": {
+									"type": "BinarySink",
+									"storeSettings": {
+										"type": "AzureBlobFSWriteSettings"
+									}
+								},
+								"enableStaging": false
+							},
+							"inputs": [
+								{
+									"referenceName": "DS_HTTP_binary",
+									"type": "DatasetReference",
+									"parameters": {
+										"URL": {
+											"value": "@concat('https://raw.githubusercontent.com/microsoft/OpenEduAnalytics/main/modules/CommunityBrands/Xporter/test_data', item().estab, '/', item().endpoint)",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "DS_ADLS_binary_file",
+									"type": "DatasetReference",
+									"parameters": {
+										"filesystem": "stage1np",
+										"filename": {
+											"value": "@concat('xporter/', item().estab, '/', item().endpoint,'.json')",
+											"type": "Expression"
+										}
+									}
+								}
+							]
+						}
+					]
+				}
+			}
+		],
+		"folder": {
+			"name": "Xporter Module/Extract"
+		},
+		"annotations": [],
+		"lastPublishTime": "2022-07-21T15:02:05Z"
+	},
+	"type": "Microsoft.Synapse/workspaces/pipelines"
+}
