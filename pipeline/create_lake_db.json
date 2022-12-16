@@ -20,10 +20,6 @@
 					}
 				],
 				"typeProperties": {
-					"notebook": {
-						"referenceName": "OEA_connector",
-						"type": "NotebookReference"
-					},
 					"parameters": {
 						"object_name": {
 							"value": "oea",
