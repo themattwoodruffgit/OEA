@@ -6,7 +6,6 @@ Function Azure-CLI-Installed()
     Where { $_.DisplayName -eq 'Microsoft Azure CLI' }) -ne $null
 }
 
-Write-Host -message 'Please login with admin account'
 Function Set-AzModule(){
     $isAzureCliInstalled = Azure-CLI-Installed
     if (!$isAzureCliInstalled) {
@@ -29,7 +28,21 @@ Function Set-AzModule(){
 	}
 }
 
-Set-ExecutionPolicy RemoteSigned
+
+# function call
+
+function Set-OEA {
+    [cmdletbinding()]
+    param(
+        [string]$subscriptionId,
+        [string]$resourceGroup,
+		 [string]$keyvaultname,
+		  [string]$synapsename
+		
+    )
+
+	
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 Install-Module Az.Resources
 Install-Module -Name Az.Accounts -RequiredVersion 2.10.4
 Install-Module -Name Az.KeyVault -RequiredVersion 2.0.0
@@ -41,14 +54,14 @@ Import-Module -Name Az.KeyVault
 Import-Module -Name Az.ManagedServiceIdentity
 Import-Module -Name Az.Accounts -RequiredVersion 2.10.4
 Import-Module -Name Az.Synapse
-# function call
+
 Set-AzModule
 
 #set parameters
-$subscription_id = ""
-$resource_group = ""
-$keyVaultName = ""
-$synapseName = ""
+$subscription_id = $subscriptionId
+$resource_group = $resourceGroup
+$keyVaultName = $keyvaultname
+$synapseName = $synapsename
 
 #execution
 az account set --subscription $subscription_id
@@ -91,19 +104,4 @@ $password = ConvertTo-SecureString "Communitybrands@123" -AsPlainText -Force
 $creds = New-Object System.Management.Automation.PSCredential ("Sarang.Kulkarni@communitybrands.com", $password)
 Update-AzSynapseWorkspace -ResourceGroupName cbuk-oea-dev-rg -Name $synapseName -GitRepository $config
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+}
