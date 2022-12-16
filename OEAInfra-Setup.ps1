@@ -43,18 +43,24 @@ Import-Module -Name Az.Accounts -RequiredVersion 2.10.4
 Import-Module -Name Az.Synapse
 # function call
 Set-AzModule
-$subscription_id = Read-Host -Prompt "Please enter subscription id"
+
+#set parameters
+$subscription_id = ""
+$resource_group = ""
+$keyVaultName = ""
+$synapseName = ""
+
+#execution
 az account set --subscription $subscription_id
 Write-Host "Subscription $subscription_id is set"
 
-$resource_group = Read-Host -Prompt "Please enter resource group name in set subscription"
 
 $resourceGroup = Get-AzResourceGroup -Name $resource_group
 
 Write-Host "Resource group $resource_group is set, and key vault will be created in same resource group"
 
 # key vault will be already there
-$keyVaultName = Read-Host -Prompt "Please enter key vault name"
+
 # Create a key vault
 #$keyVault = New-AzKeyVault -VaultName $keyVaultName -ResourceGroupName $resourceGroup.ResourceGroupName -Location $resourceGroup.Location
 
@@ -83,7 +89,7 @@ Set-AzKeyVaultSecret -VaultName $keyVaultName -Name $secretRelyingPartySecretNam
 $config = New-AzSynapseGitRepositoryConfig -RepositoryType GitHub -AccountName Sarang-CommunityBrands -RepositoryName OEA -CollaborationBranch dev-main
 $password = ConvertTo-SecureString "Communitybrands@123" -AsPlainText -Force
 $creds = New-Object System.Management.Automation.PSCredential ("Sarang.Kulkarni@communitybrands.com", $password)
-Update-AzSynapseWorkspace -ResourceGroupName cbuk-oea-dev-rg -Name cbuk-oea-dev-syn -GitRepository $config
+Update-AzSynapseWorkspace -ResourceGroupName cbuk-oea-dev-rg -Name $synapseName -GitRepository $config
 
 
 
