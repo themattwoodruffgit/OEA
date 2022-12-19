@@ -1,4 +1,3 @@
-# function call
 
 function Set-OEA {
     [cmdletbinding()]
@@ -45,3 +44,7 @@ $creds = New-Object System.Management.Automation.PSCredential ("Sarang.Kulkarni@
 Update-AzSynapseWorkspace -ResourceGroupName cbuk-oea-dev-rg -Name $synapseName -GitRepository $config
 
 }
+
+# function call
+az login
+Set-OEA 79a9a1b8-17c9-4098-bbae-16c21b7edd2a cbuk-oea-dev-rg cbuk-oea-dev-kv cbuk-oea-dev-syn
